@@ -213,38 +213,38 @@ Shader "Kamishiro/AKSlideShow"
         //-------------------------------------------------------------------------------------
         //#region Textures sampler
         UNITY_DECLARE_TEX2D(_Dummy);
-        UNITY_DECLARE_TEX2D_NOSAMPLER(_Tex0);
-        UNITY_DECLARE_TEX2D_NOSAMPLER(_Tex1);
-        UNITY_DECLARE_TEX2D_NOSAMPLER(_Tex2);
-        UNITY_DECLARE_TEX2D_NOSAMPLER(_Tex3);
-        UNITY_DECLARE_TEX2D_NOSAMPLER(_Tex4);
-        UNITY_DECLARE_TEX2D_NOSAMPLER(_Tex5);
-        UNITY_DECLARE_TEX2D_NOSAMPLER(_Tex6);
-        UNITY_DECLARE_TEX2D_NOSAMPLER(_Tex7);
-        UNITY_DECLARE_TEX2D_NOSAMPLER(_Tex8);
-        UNITY_DECLARE_TEX2D_NOSAMPLER(_Tex9);
-        UNITY_DECLARE_TEX2D_NOSAMPLER(_Tex10);
-        UNITY_DECLARE_TEX2D_NOSAMPLER(_Tex11);
-        UNITY_DECLARE_TEX2D_NOSAMPLER(_Tex12);
-        UNITY_DECLARE_TEX2D_NOSAMPLER(_Tex13);
-        UNITY_DECLARE_TEX2D_NOSAMPLER(_Tex14);
-        UNITY_DECLARE_TEX2D_NOSAMPLER(_Tex15);
-        UNITY_DECLARE_TEX2D_NOSAMPLER(_Tex16);
-        UNITY_DECLARE_TEX2D_NOSAMPLER(_Tex17);
-        UNITY_DECLARE_TEX2D_NOSAMPLER(_Tex18);
-        UNITY_DECLARE_TEX2D_NOSAMPLER(_Tex19);
-        UNITY_DECLARE_TEX2D_NOSAMPLER(_Tex20);
-        UNITY_DECLARE_TEX2D_NOSAMPLER(_Tex21);
-        UNITY_DECLARE_TEX2D_NOSAMPLER(_Tex22);
-        UNITY_DECLARE_TEX2D_NOSAMPLER(_Tex23);
-        UNITY_DECLARE_TEX2D_NOSAMPLER(_Tex24);
-        UNITY_DECLARE_TEX2D_NOSAMPLER(_Tex25);
-        UNITY_DECLARE_TEX2D_NOSAMPLER(_Tex26);
-        UNITY_DECLARE_TEX2D_NOSAMPLER(_Tex27);
-        UNITY_DECLARE_TEX2D_NOSAMPLER(_Tex28);
-        UNITY_DECLARE_TEX2D_NOSAMPLER(_Tex29);
-        UNITY_DECLARE_TEX2D_NOSAMPLER(_Tex30);
-        UNITY_DECLARE_TEX2D_NOSAMPLER(_Tex31);
+        UNITY_DECLARE_TEX2D_NOSAMPLER(_Tex0);  float4 _Tex0_ST;
+        UNITY_DECLARE_TEX2D_NOSAMPLER(_Tex1);  float4 _Tex1_ST;
+        UNITY_DECLARE_TEX2D_NOSAMPLER(_Tex2);  float4 _Tex2_ST;
+        UNITY_DECLARE_TEX2D_NOSAMPLER(_Tex3);  float4 _Tex3_ST;
+        UNITY_DECLARE_TEX2D_NOSAMPLER(_Tex4);  float4 _Tex4_ST;
+        UNITY_DECLARE_TEX2D_NOSAMPLER(_Tex5);  float4 _Tex5_ST;
+        UNITY_DECLARE_TEX2D_NOSAMPLER(_Tex6);  float4 _Tex6_ST;
+        UNITY_DECLARE_TEX2D_NOSAMPLER(_Tex7);  float4 _Tex7_ST;
+        UNITY_DECLARE_TEX2D_NOSAMPLER(_Tex8);  float4 _Tex8_ST;
+        UNITY_DECLARE_TEX2D_NOSAMPLER(_Tex9);  float4 _Tex9_ST;
+        UNITY_DECLARE_TEX2D_NOSAMPLER(_Tex10); float4 _Tex10_ST;
+        UNITY_DECLARE_TEX2D_NOSAMPLER(_Tex11); float4 _Tex11_ST;
+        UNITY_DECLARE_TEX2D_NOSAMPLER(_Tex12); float4 _Tex12_ST;
+        UNITY_DECLARE_TEX2D_NOSAMPLER(_Tex13); float4 _Tex13_ST;
+        UNITY_DECLARE_TEX2D_NOSAMPLER(_Tex14); float4 _Tex14_ST;
+        UNITY_DECLARE_TEX2D_NOSAMPLER(_Tex15); float4 _Tex15_ST;
+        UNITY_DECLARE_TEX2D_NOSAMPLER(_Tex16); float4 _Tex16_ST;
+        UNITY_DECLARE_TEX2D_NOSAMPLER(_Tex17); float4 _Tex17_ST;
+        UNITY_DECLARE_TEX2D_NOSAMPLER(_Tex18); float4 _Tex18_ST;
+        UNITY_DECLARE_TEX2D_NOSAMPLER(_Tex19); float4 _Tex19_ST;
+        UNITY_DECLARE_TEX2D_NOSAMPLER(_Tex20); float4 _Tex20_ST;
+        UNITY_DECLARE_TEX2D_NOSAMPLER(_Tex21); float4 _Tex21_ST;
+        UNITY_DECLARE_TEX2D_NOSAMPLER(_Tex22); float4 _Tex22_ST;
+        UNITY_DECLARE_TEX2D_NOSAMPLER(_Tex23); float4 _Tex23_ST;
+        UNITY_DECLARE_TEX2D_NOSAMPLER(_Tex24); float4 _Tex24_ST;
+        UNITY_DECLARE_TEX2D_NOSAMPLER(_Tex25); float4 _Tex25_ST;
+        UNITY_DECLARE_TEX2D_NOSAMPLER(_Tex26); float4 _Tex26_ST;
+        UNITY_DECLARE_TEX2D_NOSAMPLER(_Tex27); float4 _Tex27_ST;
+        UNITY_DECLARE_TEX2D_NOSAMPLER(_Tex28); float4 _Tex28_ST;
+        UNITY_DECLARE_TEX2D_NOSAMPLER(_Tex29); float4 _Tex29_ST;
+        UNITY_DECLARE_TEX2D_NOSAMPLER(_Tex30); float4 _Tex30_ST;
+        UNITY_DECLARE_TEX2D_NOSAMPLER(_Tex31); float4 _Tex31_ST;
         
         sampler2D _MainTex;
         sampler2D _BumpMap;
@@ -261,72 +261,39 @@ Shader "Kamishiro/AKSlideShow"
             half4 col = UNITY_SAMPLE_TEX2D(_Dummy, uv);
             switch(round(currentId))
             {
-                case 0:
-                    return col *= UNITY_SAMPLE_TEX2D_SAMPLER(_Tex0, _Dummy, uv);
-                case 1:
-                    return col *= UNITY_SAMPLE_TEX2D_SAMPLER(_Tex1, _Dummy, uv);
-                case 2:
-                    return col *= UNITY_SAMPLE_TEX2D_SAMPLER(_Tex2, _Dummy, uv);
-                case 3:
-                    return col *= UNITY_SAMPLE_TEX2D_SAMPLER(_Tex3, _Dummy, uv);
-                case 4:
-                    return col *= UNITY_SAMPLE_TEX2D_SAMPLER(_Tex4, _Dummy, uv);
-                case 5:
-                    return col *= UNITY_SAMPLE_TEX2D_SAMPLER(_Tex5, _Dummy, uv);
-                case 6:
-                    return col *= UNITY_SAMPLE_TEX2D_SAMPLER(_Tex6, _Dummy, uv);
-                case 7:
-                    return col *= UNITY_SAMPLE_TEX2D_SAMPLER(_Tex7, _Dummy, uv);
-                case 8:
-                    return col *= UNITY_SAMPLE_TEX2D_SAMPLER(_Tex8, _Dummy, uv);
-                case 9:
-                    return col *= UNITY_SAMPLE_TEX2D_SAMPLER(_Tex9, _Dummy, uv);
-                case 10:
-                    return col *= UNITY_SAMPLE_TEX2D_SAMPLER(_Tex10, _Dummy, uv);
-                case 11:
-                    return col *= UNITY_SAMPLE_TEX2D_SAMPLER(_Tex11, _Dummy, uv);
-                case 12:
-                    return col *= UNITY_SAMPLE_TEX2D_SAMPLER(_Tex12, _Dummy, uv);
-                case 13:
-                    return col *= UNITY_SAMPLE_TEX2D_SAMPLER(_Tex13, _Dummy, uv);
-                case 14:
-                    return col *= UNITY_SAMPLE_TEX2D_SAMPLER(_Tex14, _Dummy, uv);
-                case 15:
-                    return col *= UNITY_SAMPLE_TEX2D_SAMPLER(_Tex15, _Dummy, uv);
-                case 16:
-                    return col *= UNITY_SAMPLE_TEX2D_SAMPLER(_Tex16, _Dummy, uv);
-                case 17:
-                    return col *= UNITY_SAMPLE_TEX2D_SAMPLER(_Tex17, _Dummy, uv);
-                case 18:
-                    return col *= UNITY_SAMPLE_TEX2D_SAMPLER(_Tex18, _Dummy, uv);
-                case 19:
-                    return col *= UNITY_SAMPLE_TEX2D_SAMPLER(_Tex19, _Dummy, uv);
-                case 20:
-                    return col *= UNITY_SAMPLE_TEX2D_SAMPLER(_Tex20, _Dummy, uv);
-                case 21:
-                    return col *= UNITY_SAMPLE_TEX2D_SAMPLER(_Tex21, _Dummy, uv);
-                case 22:
-                    return col *= UNITY_SAMPLE_TEX2D_SAMPLER(_Tex22, _Dummy, uv);
-                case 23:
-                    return col *= UNITY_SAMPLE_TEX2D_SAMPLER(_Tex23, _Dummy, uv);
-                case 24:
-                    return col *= UNITY_SAMPLE_TEX2D_SAMPLER(_Tex24, _Dummy, uv);
-                case 25:
-                    return col *= UNITY_SAMPLE_TEX2D_SAMPLER(_Tex25, _Dummy, uv);
-                case 26:
-                    return col *= UNITY_SAMPLE_TEX2D_SAMPLER(_Tex26, _Dummy, uv);
-                case 27:
-                    return col *= UNITY_SAMPLE_TEX2D_SAMPLER(_Tex27, _Dummy, uv);
-                case 28:
-                    return col *= UNITY_SAMPLE_TEX2D_SAMPLER(_Tex28, _Dummy, uv);
-                case 29:
-                    return col *= UNITY_SAMPLE_TEX2D_SAMPLER(_Tex29, _Dummy, uv);
-                case 30:
-                    return col *= UNITY_SAMPLE_TEX2D_SAMPLER(_Tex30, _Dummy, uv);
-                case 31:
-                    return col *= UNITY_SAMPLE_TEX2D_SAMPLER(_Tex31, _Dummy, uv);
-                default:
-                    return col *= float4(0, 0, 0, 1);
+                case 0:  return col * UNITY_SAMPLE_TEX2D_SAMPLER(_Tex0,  _Dummy, TRANSFORM_TEX(uv, _Tex0 ));
+                case 1:  return col * UNITY_SAMPLE_TEX2D_SAMPLER(_Tex1,  _Dummy, TRANSFORM_TEX(uv, _Tex1 ));
+                case 2:  return col * UNITY_SAMPLE_TEX2D_SAMPLER(_Tex2,  _Dummy, TRANSFORM_TEX(uv, _Tex2 ));
+                case 3:  return col * UNITY_SAMPLE_TEX2D_SAMPLER(_Tex3,  _Dummy, TRANSFORM_TEX(uv, _Tex3 ));
+                case 4:  return col * UNITY_SAMPLE_TEX2D_SAMPLER(_Tex4,  _Dummy, TRANSFORM_TEX(uv, _Tex4 ));
+                case 5:  return col * UNITY_SAMPLE_TEX2D_SAMPLER(_Tex5,  _Dummy, TRANSFORM_TEX(uv, _Tex5 ));
+                case 6:  return col * UNITY_SAMPLE_TEX2D_SAMPLER(_Tex6,  _Dummy, TRANSFORM_TEX(uv, _Tex6 ));
+                case 7:  return col * UNITY_SAMPLE_TEX2D_SAMPLER(_Tex7,  _Dummy, TRANSFORM_TEX(uv, _Tex7 ));
+                case 8:  return col * UNITY_SAMPLE_TEX2D_SAMPLER(_Tex8,  _Dummy, TRANSFORM_TEX(uv, _Tex8 ));
+                case 9:  return col * UNITY_SAMPLE_TEX2D_SAMPLER(_Tex9,  _Dummy, TRANSFORM_TEX(uv, _Tex9 ));
+                case 10: return col * UNITY_SAMPLE_TEX2D_SAMPLER(_Tex10, _Dummy, TRANSFORM_TEX(uv, _Tex10));
+                case 11: return col * UNITY_SAMPLE_TEX2D_SAMPLER(_Tex11, _Dummy, TRANSFORM_TEX(uv, _Tex11));
+                case 12: return col * UNITY_SAMPLE_TEX2D_SAMPLER(_Tex12, _Dummy, TRANSFORM_TEX(uv, _Tex12));
+                case 13: return col * UNITY_SAMPLE_TEX2D_SAMPLER(_Tex13, _Dummy, TRANSFORM_TEX(uv, _Tex13));
+                case 14: return col * UNITY_SAMPLE_TEX2D_SAMPLER(_Tex14, _Dummy, TRANSFORM_TEX(uv, _Tex14));
+                case 15: return col * UNITY_SAMPLE_TEX2D_SAMPLER(_Tex15, _Dummy, TRANSFORM_TEX(uv, _Tex15));
+                case 16: return col * UNITY_SAMPLE_TEX2D_SAMPLER(_Tex16, _Dummy, TRANSFORM_TEX(uv, _Tex16));
+                case 17: return col * UNITY_SAMPLE_TEX2D_SAMPLER(_Tex17, _Dummy, TRANSFORM_TEX(uv, _Tex17));
+                case 18: return col * UNITY_SAMPLE_TEX2D_SAMPLER(_Tex18, _Dummy, TRANSFORM_TEX(uv, _Tex18));
+                case 19: return col * UNITY_SAMPLE_TEX2D_SAMPLER(_Tex19, _Dummy, TRANSFORM_TEX(uv, _Tex19));
+                case 20: return col * UNITY_SAMPLE_TEX2D_SAMPLER(_Tex20, _Dummy, TRANSFORM_TEX(uv, _Tex20));
+                case 21: return col * UNITY_SAMPLE_TEX2D_SAMPLER(_Tex21, _Dummy, TRANSFORM_TEX(uv, _Tex21));
+                case 22: return col * UNITY_SAMPLE_TEX2D_SAMPLER(_Tex22, _Dummy, TRANSFORM_TEX(uv, _Tex22));
+                case 23: return col * UNITY_SAMPLE_TEX2D_SAMPLER(_Tex23, _Dummy, TRANSFORM_TEX(uv, _Tex23));
+                case 24: return col * UNITY_SAMPLE_TEX2D_SAMPLER(_Tex24, _Dummy, TRANSFORM_TEX(uv, _Tex24));
+                case 25: return col * UNITY_SAMPLE_TEX2D_SAMPLER(_Tex25, _Dummy, TRANSFORM_TEX(uv, _Tex25));
+                case 26: return col * UNITY_SAMPLE_TEX2D_SAMPLER(_Tex26, _Dummy, TRANSFORM_TEX(uv, _Tex26));
+                case 27: return col * UNITY_SAMPLE_TEX2D_SAMPLER(_Tex27, _Dummy, TRANSFORM_TEX(uv, _Tex27));
+                case 28: return col * UNITY_SAMPLE_TEX2D_SAMPLER(_Tex28, _Dummy, TRANSFORM_TEX(uv, _Tex28));
+                case 29: return col * UNITY_SAMPLE_TEX2D_SAMPLER(_Tex29, _Dummy, TRANSFORM_TEX(uv, _Tex29));
+                case 30: return col * UNITY_SAMPLE_TEX2D_SAMPLER(_Tex30, _Dummy, TRANSFORM_TEX(uv, _Tex30));
+                case 31: return col * UNITY_SAMPLE_TEX2D_SAMPLER(_Tex31, _Dummy, TRANSFORM_TEX(uv, _Tex31));
+                default: return col * float4(0, 0, 0, 1);
             }
         }
         half4 SlideMode(float2 uv, fixed currentId, fixed nextId, fixed isTransision, fixed ratio, fixed direction)

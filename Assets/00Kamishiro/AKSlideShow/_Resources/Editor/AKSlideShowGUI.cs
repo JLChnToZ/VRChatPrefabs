@@ -11,8 +11,10 @@
 #if UNITY_EDITOR
 using System;
 using System.Linq;
+using System.Collections;
 using UnityEditor;
 using UnityEngine;
+using UnityEditorInternal;
 
 namespace Kamishiro.UnityShader.AKSlideShow
 {
@@ -59,6 +61,8 @@ namespace Kamishiro.UnityShader.AKSlideShow
         #region  Albedo Texture
         private MaterialProperty mainTex;
         private MaterialProperty[] textures = new MaterialProperty[32];
+        private ArrayList dummyList;
+        private ReorderableList reorderableList;
         #endregion
         #endregion
 
@@ -104,7 +108,69 @@ namespace Kamishiro.UnityShader.AKSlideShow
             replaceRatio = FindProperty("_ReplaceRatio", props);
             secondaryEmissionPower = FindProperty("_SecondaryEmissionPower", props);
             factorTexture = FindProperty("_FactorTexture", props);
-            for (int i = 0; i < textures.Length; i++) textures[i] = FindProperty("_Tex" + i.ToString(), props);
+            for (int i = 0; i < textures.Length; i++) textures[i] = FindProperty($"_Tex{i}", props);
+            if (reorderableList == null)
+            {
+                dummyList = new ArrayList();
+                reorderableList = new ReorderableList(dummyList, typeof(object))
+                {
+                    onCanAddCallback = _ => count.floatValue < 32,
+                    onAddCallback = _ =>
+                    {
+                        if (count.floatValue >= 32) return;
+                        dummyList.Add(null);
+                        count.floatValue++;
+                    },
+                    onReorderCallbackWithDetails = (_, oldIndex, newIndex) =>
+                    {
+                        var texture = textures[oldIndex].textureValue;
+                        var textureST = textures[oldIndex].textureScaleAndOffset;
+                        if (oldIndex > newIndex)
+                            for (int i = oldIndex; i > newIndex; i--)
+                            {
+                                textures[i].textureValue = textures[i - 1].textureValue;
+                                textures[i].textureScaleAndOffset = textures[i - 1].textureScaleAndOffset;
+                            }
+                        else
+                            for (int i = oldIndex; i < newIndex; i++)
+                            {
+                                textures[i].textureValue = textures[i + 1].textureValue;
+                                textures[i].textureScaleAndOffset = textures[i + 1].textureScaleAndOffset;
+                            }
+                        textures[newIndex].textureValue = texture;
+                        textures[newIndex].textureScaleAndOffset = textureST;
+                    },
+                    onRemoveCallback = list =>
+                    {
+                        int iCount = (int)count.floatValue;
+                        if (iCount <= 0) return;
+                        if (list.index < 0) list.index = iCount - 1;
+                        for (int i = list.index; i < iCount - 1; i++)
+                        {
+                            textures[i].textureValue = textures[i + 1].textureValue;
+                            textures[i].textureScaleAndOffset = textures[i + 1].textureScaleAndOffset;
+                        }
+                        for (int i = iCount; i < 32; i++)
+                        {
+                            textures[i].textureValue = null;
+                            textures[i].textureScaleAndOffset = new Vector4(1, 1, 0, 0);
+                        }
+                        dummyList.RemoveAt(iCount - 1);
+                        count.floatValue--;
+                    },
+                    drawHeaderCallback = rect => GUI.Label(rect, "Textures"),
+                    drawElementCallback = (rect, index, isActive, isFocused) => m_MaterialEditor.TextureProperty(rect, textures[index], string.Empty),
+                    elementHeightCallback = index => MaterialEditor.GetDefaultPropertyHeight(textures[index]),
+                };
+            }
+            if (dummyList.Count > count.floatValue)
+            {
+                dummyList.RemoveRange((int)count.floatValue, dummyList.Count - (int)count.floatValue);
+            }
+            else while (dummyList.Count < count.floatValue)
+            {
+                dummyList.Add(null);
+            }
         }
 
         private void ShaderPropertiesGUI()
@@ -185,9 +251,16 @@ namespace Kamishiro.UnityShader.AKSlideShow
                         EditorGUILayout.Space();
                     }
 
+                    /*
                     count.floatValue = EditorGUILayout.IntSlider(count.displayName, (int)count.floatValue, 1, 32);
                     int num = (int)count.floatValue;
-                    for (int i = 0; i < textures.Length; i++) if (num >= i + 1) m_MaterialEditor.TexturePropertySingleLine(new GUIContent(textures[i].displayName), textures[i]);
+                    for (int i = 0; i < textures.Length; i++) if (num >= i + 1)
+                    {
+                        m_MaterialEditor.TexturePropertySingleLine(new GUIContent(textures[i].displayName), textures[i]);
+                        m_MaterialEditor.TextureScaleOffsetProperty(textures[i]);
+                    }
+                    */
+                    reorderableList.DoLayoutList();
                 }
 
                 EditorGUILayout.Space();
